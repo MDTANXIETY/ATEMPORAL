@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Atemporal — Reinvención del rodeo peruano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fff;
+      --text:#0b0b0b;
+      --muted:#6b6b6b;
+      --accent:#a6632a;
+      --accent-2:#2b2b2b;
+      --gap:24px;
+      --radius:14px;
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:var(--container);margin:0 auto;padding:40px}
+
+    header{position:fixed;left:0;right:0;top:0;height:80px;display:flex;align-items:center;backdrop-filter:blur(6px);z-index:40}
+    .nav-inner{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{font-family:Playfair Display,serif;font-weight:700;font-size:20px;letter-spacing:1px}
+    nav a{margin-left:20px;font-weight:600;color:var(--muted)}
+    .cta{padding:10px 14px;border-radius:999px;border:1px solid var(--accent);font-weight:600}
+
+    .hero{height:88vh;display:flex;align-items:center;padding-top:80px}
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
+    .hero-copy h1{font-family:Playfair Display,serif;font-size:48px;margin:0;line-height:1}
+    .hero-copy p{color:var(--muted);margin-top:12px;max-width:540px}
+    .hero-visual{position:relative;background:#f5f5f5;border-radius:18px;height:560px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero-visual video{width:100%;height:100%;object-fit:cover;border-radius:18px}
+
+    .tagline{display:inline-block;padding:8px 12px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.6),transparent);font-size:13px}
+
+    .animated-bg{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      width:100vw;
+      height:100vh;
+      object-fit:cover;
+      min-width:120%;
+      min-height:120%;
+      transform:scale(1.15);
+      transition:transform 0.6s ease;
+      filter:brightness(0.92);
+    }
+
+    .card{transition:transform 0.35s ease, box-shadow 0.35s ease}
+    .card:hover{transform:scale(1.03);box-shadow:0 10px 28px rgba(0,0,0,0.12)}
+
+    nav a{transition:color 0.25s ease, transform 0.25s ease}
+    nav a:hover{color:var(--accent);transform:translateY(-2px)}
+
+    .btn{transition:background 0.25s ease, transform 0.25s ease}
+    .btn:hover{background:var(--accent);color:white;transform:translateY(-2px)}
+
+    section{padding:100px 0}
+    h2{font-family:Playfair Display,serif;font-size:28px;margin:0 0 18px}
+    .muted{color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(11,11,11,0.06)}
+    .card img{width:100%;height:320px;object-fit:cover}
+    .card .meta{padding:14px}
+
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
+    .modal.active{display:flex}
+    .sheet{width:min(920px,92%);background:white;border-radius:14px;overflow:hidden;display:flex;gap:20px}
+    .sheet img{width:46%;height:420px;object-fit:cover}
+    .sheet .info{padding:22px}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;border:1px solid #ddd}
+
+    footer{padding:60px 0;border-top:1px solid #eee;color:var(--muted)}
+
+    .banner {
+  width: 100%;
+  max-width: 2358px;   /* ancho máximo del banner */
+  aspect-ratio: 2358 / 1080; /* mantiene la proporción 2358x1080 */
+  border-radius: 12px;
+  margin: 60px auto;   /* centrado y espacio superior/inferior */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #555;
+  font-size: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr;}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      header{height:72px}
+    }
+    @media (max-width:600px){
+      .grid{grid-template-columns:1fr}
+      .hero-copy h1{font-size:32px}
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bgVideo" class="animated-bg" autoplay muted loop playsinline src="VIDEO.mp4"></video>
+
+  <header>
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo">Atemporal</div>
+        <div class="tagline muted">Tradition → Transform</div>
+      </div>
+      <nav>
+        <a href="#hero">Inicio</a>
+        <a href="#lookbook">Lookbook</a>
+        <a href="#story">La Historia</a>
+        <a href="#contact" class="cta">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero wrap" id="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="tagline">Reinvención del rodeo peruano</div>
+          <h1>Atemporal — donde la tradición se transforma</h1>
+          <p class="muted">Fusionamos el rodeo de Oxapampa y la estética urbana limeña. Moda, patrimonio y experimentación.</p>
+          <p style="margin-top:18px">
+            <a class="btn" href="#lookbook">Ver colección</a>
+            <a class="btn" style="margin-left:12px" href="#story">La historia</a>
+          </p>
+        </div>
+
+        <div class="hero-visual">
+          <video autoplay muted loop playsinline src="VIDEO.mp4"></video>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER 1 -->
+    <div class="banner" style="background-image:url('banner 0001.png');"></div>
+
+    <!-- LOOKBOOK -->
+    <section id="lookbook" class="wrap">
+      <h2 style="color:#fff;">Lookbook</h2>
+      <p class="muted" style="color:#fff;">Piezas que reinterpretan símbolos y siluetas.</p>
+
+      <div class="grid" style="margin-top:22px">
+        <div class="card" data-index="1" onclick="openProduct(1)">
+          <img src="JEAN-BAGGY.jpg" alt="Jean Baggy">
+          <div class="meta">
+            <div style="font-weight:700">Jean Baggy Urban</div>
+            <div class="muted" style="font-size:13px">Corte urbano · Azul profundo</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="2" onclick="openProduct(2)">
+          <img src="CHALECO.jpg" alt="Chaleco">
+          <div class="meta">
+            <div style="font-weight:700">Chaleco Oxapampa</div>
+            <div class="muted" style="font-size:13px">Tono burgundy · Corte western</div>
+          </div>
+        </div>
+
+        <div class="card" data-index="3" onclick="openProduct(3)">
+          <img src="CAMISA-A-CUADROS.jpg" alt="Camisa a cuadros">
+          <div class="meta">
+            <div style="font-weight:700">Camisa Western Lima</div>
+            <div class="muted" style="font-size:13px">Patrón andino reinterpretado</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER 2 -->
+    <div class="banner" style="background-image:url('banner 0002.png');"></div>
+
+    <!-- STORY -->
+    <section id="story" class="wrap">
+       <h2 style="color:#fff;">Nuestro enfoque</h2>
+      <p class="muted" style="color:#fff;">Atemporal nace de la observación: ver a los jinetes y las batallas de taco como archivos vivos. Nuestro proceso creativo parte del respeto y termina en la experimentación textil y editorial. </p>
+
+      <div style="display:flex;gap:18px;margin-top:22px;align-items:flex-start">
+        <div style="flex:1;background:#fbfbfb;padding:18px;border-radius:12px">
+          <strong>Proceso</strong>
+          <p class="muted">Investigación de campo · Prototipado experimental</p>
+        </div>
+        <div style="width:320px;background:#fbfbfb;padding:18px;border-radius:12px">
+          <strong>Valores</strong>
+          <p class="muted">Autenticidad · Innovación cultural</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER 3 -->
+    <div class="banner" style="background-image:url('banner 0003.png');"></div>
+
+    <!-- CONTACTO -->
+    <section id="contact" class="wrap">
+      <h2 style="color:#fff;">Contacto</h2>
+      <p class="muted" style="color:#fff;">Colaboraciones y prensa.</p>
+      <form onsubmit="event.preventDefault();alert('Formulario de demo')">
+        <div style="display:flex;gap:12px;margin-bottom:12px">
+          <input placeholder="Nombre" required>
+          <input placeholder="Email" type="email" required>
+        </div>
+        <textarea placeholder="Mensaje" required style="width:100%;min-height:120px"></textarea>
+        <p><button class="btn" style="margin-top:12px">Enviar</button></p>
+      </form>
+    </section>
+
+    <!-- BANNER 4 -->
+    <div class="banner" style="background-image:url('banner 0005.png');"></div>
+
+    <!-- CATÁLOGO -->
+    <section class="catalogo wrap">
+      <h2 style="color:#fff;">Catálogo Atemporal</h2>
+      <div class="catalog-grid">
+        <div class="card"><img src="BOTAS.jpg"><h3>Bota Atemporal Black Leather</h3></div>
+        <div class="card"><img src="CAMISA-A-CUADROS.jpg"><h3>Camisa Western Lima</h3></div>
+        <div class="card"><img src="CHALECO.jpg"><h3>Chaleco Oxapampa Burgundy</h3></div>
+        <div class="card"><img src="JEAN-BAGGY.jpg"><h3>Jean Baggy Urban Azul</h3></div>
+        <div class="card"><img src="SOMBRERO.jpg"><h3>Sombrero Yankee Westerner</h3></div>
+      </div>
+    </section>
+
+    <!-- BANNER 5 -->
+    <div class="banner" style="background-image:url('banner 0001.png');"></div>
+
+    <footer class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:20px">
+        <div>
+          <div style="font-weight:700" style="color:#fff;">Atemporal</div>
+          <div class="muted" style="font-size:13px" style="color:#fff;">Reinvención del rodeo peruano · Lima / Oxapampa</div>
+        </div>
+        <div class="muted" style="color:#fff;">© Atemporal — 2025</div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="sheet">
+      <img id="mimg">
+      <div class="info">
+        <h3 id="mname"></h3>
+        <p class="muted" id="mdesc"></p>
+        <p style="margin-top:18px"><strong>Precio:</strong> S/ 480</p>
+        <p style="margin-top:22px">
+          <a class="btn" onclick="closeModal()">Cerrar</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = {
+      1:{name:'Jean Baggy Urban',img:'JEAN-BAGGY.jpg',desc:'Corte urbano azul profundo.'},
+      2:{name:'Chaleco Oxapampa',img:'CHALECO.jpg',desc:'Tono burgundy · Inspiración western.'},
+      3:{name:'Camisa Western Lima',img:'CAMISA-A-CUADROS.jpg',desc:'Patrón andino reinterpretado.'}
+    }
+
+    function openProduct(i){
+      let p = products[i];
+      mimg.src = p.img;
+      mname.textContent = p.name;
+      mdesc.textContent = p.desc;
+      modal.classList.add('active');
+    }
+    function closeModal(){ modal.classList.remove('active'); }
+
+    const bgVideo = document.getElementById('bgVideo');
+    window.addEventListener('scroll',()=>{
+      const scale = Math.max(1, 1.15 - window.scrollY/1400);
+      bgVideo.style.transform = `scale(${scale})`;
+    });
+  </script>
+
+</body>
+</html>
